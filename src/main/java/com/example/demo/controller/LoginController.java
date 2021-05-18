@@ -65,16 +65,16 @@ public class LoginController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(new ResponseMessage("Please check your information"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage("Please check your information"), HttpStatus.OK);
         }
 
         if (userService.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity<>(new ResponseMessage("Existed Username"),
-                    HttpStatus.BAD_REQUEST);
+                    HttpStatus.OK);
         }
         if (userService.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<>(new ResponseMessage("Existed Email"),
-                    HttpStatus.BAD_REQUEST);
+                    HttpStatus.OK);
         }
 
         // Creating user's account
